@@ -13,7 +13,7 @@ RANGE_NAME = "Sheet1!A:D"  # assuming columns: date | title | time | location
 
 def get_events():
     """Fetch events directly from Google Sheets (no caching)."""
-    creds = Credentials.from_service_account_file("service_account.json", scopes=SCOPES)
+    creds = Credentials.from_service_account_file("/etc/secrets/service_account.json")
     client = gspread.authorize(creds)
     sheet = client.open_by_key(SPREADSHEET_ID).sheet1
     data = sheet.get_all_records()
@@ -26,3 +26,4 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
